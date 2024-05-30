@@ -15,6 +15,7 @@ def read_json(file_path):
 
             if not isinstance(data, (dict,list)):
                 raise ValueError('Plik JSON nie jest dobrze sformatowany')
+            return data
     except ValueError as val_err:
         print(val_err,"Brak wartosci pliku")
         return None
