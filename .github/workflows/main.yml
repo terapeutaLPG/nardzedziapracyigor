@@ -1,0 +1,38 @@
+name: Build and Upload EXE
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 * * 1'  # Raz w tygodniu w poniedziałek o północy
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build EXE
+      run: |
+        pyinstaller --onefile ./converter/converter_no_ui.py
+      shell: pwsh
+
+    - name: Upload EXE
+      uses: actions/upload-artifact@v3
+      with:
+        name: my_executable
+        path: dist/your_script.exe
