@@ -3,7 +3,7 @@ name: Build and Upload EXE
 on:
   push:
     branches:
-      - master
+      - main
   schedule:
     - cron: '0 0 * * 1'  # Raz w tygodniu w poniedziałek o północy
   workflow_dispatch:
