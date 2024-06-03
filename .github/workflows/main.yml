@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 0 * * 1'  # Raz w tygodniu w poniedziałek o północy
+    - cron: '*/5 * * * *' 
   workflow_dispatch:
 
 jobs:
@@ -24,6 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install pyinstaller
         pip install -r requirements.txt
 
     - name: Build EXE
@@ -35,4 +36,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: my_executable
-        path: dist/your_script.exe
+        path: dist/converter_no_ui.exe  
